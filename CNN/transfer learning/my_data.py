@@ -2,7 +2,7 @@ import numpy as np
 
 
 def load_train_data(dim):
-	from keras.datasets import mnist
+	from tensorflow.keras.datasets import mnist
 	(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 	x_train_convert = [convert_pic(data,dim) for data in x_train]

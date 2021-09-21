@@ -10,7 +10,7 @@ from image_class import t_model
 from image_util import make_gradcam_heatmap,save_and_display_gradcam
 # Part 5: Prediction Real cases
 
-test_path = 'data/test_7_2.jpg'
+test_path = 'data/test_2_1.jpg'
 # x = Image.open(test_path)
 # plt.imshow(x)
 # plt.show()
@@ -33,5 +33,5 @@ heatmap = make_gradcam_heatmap(test_IMG, model, 'conv3')
 plt.matshow(heatmap)
 plt.show()
 
-save_and_display_gradcam(test_IMG, heatmap,dim, alpha=0.8)
+save_and_display_gradcam(test_IMG, heatmap,dim, alpha=0.8,cam_path='data/cam/%s_cam.jpg' % predict_digit)
 print('done')

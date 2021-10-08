@@ -6,6 +6,7 @@ from cnn_model import CNNKeras
 from tensorflow import keras
 import pickle
 import matplotlib.pyplot as plt
+
 from cnn_utils import make_gradcam_heatmap, txt2vec, _plot_score, _get_text_xticks
 
 clf = keras.models.load_model('../Model/textcnn_model.h5')
@@ -28,4 +29,4 @@ resize_heatmap = tf.keras.preprocessing.image.img_to_array(resize_heatmap)
 # plt.matshow(resize_heatmap[:,0])
 # plt.show()
 _plot_score(resize_heatmap[:,0,0], pred_label=label_list[predict_label], txt_len=len(test_txt), xticks=_get_text_xticks(test_txt))
-
+# print('done')

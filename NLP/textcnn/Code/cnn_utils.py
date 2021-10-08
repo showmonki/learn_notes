@@ -129,14 +129,16 @@ def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None
 
 def _plot_score(heatmap, pred_label, xticks,txt_len):
 	import matplotlib.pyplot as plt
-	plt.rcParams['font.sans-serif'] = ['SimHei']  # ['SimHei'], Arial Unicode MS
-	_axis_fontsize = 14
-	fig = plt.figure(figsize=(14, 10))
+	from matplotlib.font_manager import FontProperties
+	font = FontProperties(fname='../Kai.ttf')
+	_axis_fontsize = 12
+	# plt.tight_layout()
+	plt.figure(figsize=(7, 2.5))
 	plt.yticks([])
 	# 若报错does not match the number of ticklabels， matplotlib 版本更新
-	plt.xticks(range(0, txt_len), xticks, fontsize=_axis_fontsize)
-	fig.add_subplot(1, 1, 1)
-	plt.figtext(x=0.13, y=0.54, s='Prediction: {}'.format(pred_label), fontsize=14, fontproperties="SimSun")
+	plt.xticks(range(0, txt_len), xticks, fontproperties=font)
+	# fig.add_subplot(1, 1, 1)
+	plt.figtext(x=0.13, y=0.54, s='Prediction: {}'.format(pred_label), fontsize=_axis_fontsize)
 	img = plt.imshow([heatmap])
 	plt.show()
 

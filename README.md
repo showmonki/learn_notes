@@ -9,8 +9,14 @@
 4. grad-cam for Conv Layer (matplotlib==3.0.3)
 > [image](CNN/transfer learning/image_predict_digest.ipynb) and [text](NLP/Code/cnn_predict_plot.ipynb) both able to view; text used image resize to rescale grads to txt len
 
-TODO:
-- [ ] pipeline build  
+## NLP
+* [textcnn](NLP/textcnn): classification for short description of products
+> conv1d, text-to-vec preprocess comparison.
+
+
+## CV
+* classification for website pictures. 
+
 
 ## Python tricks
 1. tkinter

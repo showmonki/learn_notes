@@ -7,22 +7,29 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 
-clf = keras.models.load_model('../Model/coffee_img_model.h5')
+clf = keras.models.load_model('../Model/coffee_img_model_t2.h5')
 with open('../Model/coffee_img_label.txt', "r") as f:
 	label_dict = {v:k for k,v in eval(f.read()).items()}
-dim = (300,300,3)
-url = 'https://img.alicdn.com/bao/uploaded/i3/1752533979/O1CN01VT7bYk1fGQZ3Li5Pj_!!1752533979.jpg' # GCOFFEE
-# url = 'https://img.alicdn.com/bao/uploaded/i1/1724505357/TB2EvprhlDH8KJjSszcXXbDTFXa_!!1724505357.jpg' # RTDC
-test_IMG = url_to_image(url)
-test_convert = convert_image(test_IMG,dim)
-test_vec = np.expand_dims(test_convert,axis=0) # 一个图片因此加dim
-test_vec=tf.cast(test_vec,tf.float32)
-result = clf.predict(test_vec)
-predict_label, prediction_prob = result.argmax(), result.max()
-print('prediction is {0} with prob {1}'.format(label_dict[predict_label], prediction_prob))
-heatmap = make_gradcam_heatmap(test_vec, clf, 'conv2d_3')
-plt.imshow(heatmap)
-plt.show()
+dim = (500,500,3)
+def url_predict_plot(url,conv_layer):
+	test_IMG = url_to_image(url)
+	test_convert = convert_image(test_IMG,dim)
+	test_vec = np.expand_dims(test_convert,axis=0) # 一个图片因此加dim
+	test_vec=tf.cast(test_vec,tf.float32)
+	result = clf.predict(test_vec)
+	predict_label, prediction_prob = result.argmax(), result.max()
+	print('prediction is {0} with prob {1}'.format(label_dict[predict_label], prediction_prob))
+	heatmap = make_gradcam_heatmap(test_vec, clf, conv_layer)
+	# plt.imshow(heatmap)
+	# plt.show()
+	save_and_display_gradcam(test_IMG, heatmap,test_IMG.size,label_dict[predict_label], alpha=0.8)
 
-save_and_display_gradcam(test_IMG, heatmap,test_IMG.size, alpha=0.8,cam_path='/%s_cam.jpg' % predict_label)
+url1 = 'https://img.alicdn.com/bao/uploaded/i3/1752533979/O1CN01VT7bYk1fGQZ3Li5Pj_!!1752533979.jpg' # GCOFFEE
+url2 = 'https://img.alicdn.com/bao/uploaded/i1/1724505357/TB2EvprhlDH8KJjSszcXXbDTFXa_!!1724505357.jpg' # RTDC
+url3 = 'https://img.alicdn.com/bao/uploaded/i4/2549841410/O1CN01tbWrDO1MHp9vTP2t6_!!2549841410.jpg' # RTDC
+url4 = 'https://img.alicdn.com/bao/uploaded/i3/1724505357/O1CN01SYl5Vs1pRYMcZdflg_!!1724505357.jpg' # COFF
+urls = [url1,url2,url3,url4]
+for url in urls:
+	url_predict_plot(url,'conv_7b')
+
 print('done')

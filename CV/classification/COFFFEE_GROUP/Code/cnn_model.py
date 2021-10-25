@@ -43,3 +43,27 @@ class t_model():
                       # keras.losses.BinaryCrossentropy(from_logits=True),
                       metrics=['accuracy'])
         return model
+
+
+class t2():
+
+    def __init__(self,num_classes,img_shape):
+        self.input_shape = img_shape
+        self.num_classes = num_classes
+        self.base_model = self.load_model()
+
+    def load_model(self):
+        pretrain_model = keras.applications.InceptionResNetV2(include_top=False,input_shape=self.input_shape,weights='imagenet')
+        pretrain_model.trainable = False
+        x=pretrain_model.output
+        x = keras.layers.GlobalMaxPool2D(name='gmp')(x)
+        x = keras.layers.Dense(100, activation='softmax')(x)
+        outputs = keras.layers.Dense(self.num_classes, activation='softmax')(x)
+        model = keras.Model(inputs=pretrain_model.input, outputs=outputs, name='transfer_model')
+
+        model.compile(optimizer=keras.optimizers.Adam(),
+                      loss='categorical_crossentropy',
+                      # keras.losses.BinaryCrossentropy(from_logits=True),
+                      metrics=['accuracy'])
+        return model
+

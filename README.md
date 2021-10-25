@@ -16,6 +16,10 @@
 
 ## CV
 * classification for website pictures. 
+* InceptionResNetV2 with grad-cam to review model quality
+
+### TODO
+- add [earlystop](https://www.kaggle.com/lonnieqin/flower-classification-on-tpu) etc
 
 
 ## Python tricks

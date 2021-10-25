@@ -87,7 +87,7 @@ def convert_image(im, dim):
 	return temp_data
 
 
-def save_and_display_gradcam(img, heatmap, img_dim, cam_path="cam.jpg", alpha=0.4):
+def save_and_display_gradcam(img, heatmap, img_dim, pred_label, alpha=0.4):
 	import matplotlib.cm as cm
 	# Rescale heatmap to a range 0-255
 	heatmap = np.uint8(255 * heatmap)
@@ -111,5 +111,6 @@ def save_and_display_gradcam(img, heatmap, img_dim, cam_path="cam.jpg", alpha=0.
 	# Save the superimposed image
 # 	superimposed_img.save(cam_path)
 	# Display Grad CAM
+	plt.title('Prediction: {}'.format(pred_label))
 	plt.imshow(superimposed_img)
 	plt.show()

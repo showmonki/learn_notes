@@ -79,6 +79,17 @@ def url_to_image(url):
 		im = im.convert('RGB')
 	return im
 
+
+def url_to_image_crop(url, box):
+	# download the image, convert it to a NumPy array, and then read
+	# it into OpenCV format
+	resp = requests.get(url)
+	im = Image.open(BytesIO(resp.content))
+	im = im.crop(box) if box else im
+	if im.mode != 'RGB':
+		im = im.convert('RGB')
+	return im
+
 def convert_image(im, dim):
 	image_resized = im.resize(dim[:2], Image.ANTIALIAS)
 	temp_data = np.array(image_resized) / 255

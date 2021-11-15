@@ -1,0 +1,1 @@
+keras版本最好是2.6.* 否则可能to_categorical可能出问题

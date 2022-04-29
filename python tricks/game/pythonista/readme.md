@@ -1,0 +1,1 @@
+pythonista code requires "pythonista" app on ios, not for PCs. 

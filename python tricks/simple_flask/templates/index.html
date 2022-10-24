@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="{{ url_for('main_func') }}" method="post">
+        <input type="text" name="name" placeholder="type anything here" >
+        <button type="submit">get str</button>
+    </form>
+
+    <form action="{{ url_for('split_date') }}" method="get">
+        <input type="text" name="date" placeholder="Input date with '-'" >
+        <button type="submit">get date</button>
+    </form>
+    <p>
+        Result: <br>{{ result_text }}
+    </p>
+</body>
+</html>

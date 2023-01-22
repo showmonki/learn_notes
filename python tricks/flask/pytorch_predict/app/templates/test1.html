@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<meta charset="utf-8">
+<script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+<body>
+	<div>
+		<form id='pic-predict' method="post" enctype="multipart/form-data">
+			<input id="uploadFile" type="file" size="30" name="file"/>
+			<br>
+            <input type="submit" class="button-new" name="submit" value="提交" stype="margin-top:15px;">
+
+		</form>
+	</div>
+    <br>
+    <div id="predict_data">
+    </div>
+    <br>
+<form id="hwy" method="post" enctype="multipart/form-data">
+        <br>
+        <input type="text" name="username" value="1">
+        <br/>
+        <input type="password" name="password" value="1">
+        <br>
+        <input type="submit" name="submit" value="提交">
+    </form>
+<div id="ajax_data">
+
+</div>
+
+
+	</body>
+
+
+<script type="text/javascript">
+    $('#hwy').submit(function () {
+        $.ajax({
+            // 提交数据的url
+            url: "/ajax_form",
+            // 提交数据的方式为POST
+            type: 'POST',
+            // 指定提交的数据，这里使用的serialize方法，该方法可以将当前的表单转化为可以使用Ajax提交的数据格式
+            data: $(this).serialize(),
+            // 不开启数据缓存
+            cache: false,
+            // 请求成功则会执行该方法
+            success: function (data) {
+                // 显示响应到的数据
+                console.log(data);
+                // 插入数据
+                var comment_html = "<div id='hwy_1'>" + data['log_info'] + "</div>";
+                $('#hwy_1').remove();
+                $('#ajax_data').prepend(comment_html);
+                $('#hwy_input').val('');
+            },
+
+        });
+        return false;
+
+     })
+	$('#pic-predict').submit(function(){
+        var formdata = new FormData();
+        var picdata = $("#uploadFile")[0].files[0];
+        formdata.append('file',picdata);
+		$.ajax(
+				{
+					url:'/predict',
+					type: 'POST',
+                    data: formdata,
+                    {#dataType: "json",#}
+					{#cache:false,#}
+                    processData: false,
+                    contentType: false,
+                    async: false,
+					success: function (res) {
+					// 显示响应到的数据
+					console.log(res);
+					// 插入数据
+					var comment_html = "<div id='hwy_predict'>" + JSON.stringify(res['result']) + "</div>";
+					$('#hwy_predict').remove();
+					$('#predict_data').prepend(comment_html);
+					$('#hwy_result').val('');
+            },
+				}
+		);
+        return false;
+	})
+   </script>
+
+</html>

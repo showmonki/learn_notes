@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<body>
+	<ul>
+		<li><a href='/test_1?name=aaa&age=15'>test result</a></li>
+		<li><a href="{{ url_for('check') }} ">test result2</a></li>
+	</ul>
+	<p>
+		test
+	</p>
+	<form action="{{ url_for('check') }}" method="get">
+		<input type='text' name='name' />
+		<input type='text' name='age' />
+		<button type='submit'> go </button>
+	</form>
+<br>
+	<div>
+		<form method="post" action="https://localhost:5000/upload" enctype="multipart/form-data">
+			<input type="file" size="30" name="photo"/>
+			<br>
+				<input type="submit" class="button-new" value="submit pic" stype="margin-top:15px;">
+
+		</form>
+	</div>
+</body>
+</html>

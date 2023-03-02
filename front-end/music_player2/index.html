@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #myAudio{
+            display:none;
+
+        }
+        .control{
+            width: 300px;
+            height: 80px;
+            background: aliceblue;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 20px 20px 5px rgba(132,132,132,0.2);
+        }
+        .player{
+            top:100px;
+            position: relative;
+        }
+        .alarm{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: black;
+            transform: scale(1);
+            transition: all 0.5s ease;
+        }
+        .alarm::before{
+            content:'';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            border-radius: 50%;
+            background: url('https://p2.music.126.net/JyOMeV3PyJoC5x4mhedqcA==/109951166231841225.jpg?param=130y130') no-repeat center center;
+            background-size: 100%;
+        }
+        .control.active .alarm::before{
+            animation: rotateF 3s infinite linear;
+        }
+        @keyframes rotateF {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+        .alarm::after{
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: floralwhite;
+            border-radius: 50%;
+            z-index: 1;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+
+        }
+        .button{
+            display: flex;
+            justify-content: flex-end;
+            height: 80px;
+            padding: 0 15px;
+        }
+        .prev, .play, .next{
+            width: 55px;
+            height: auto;
+            border-radius: 10px;
+            background: black;
+            cursor: pointer;
+        }
+        .prev:hover, .play:hover, .next:hover{
+            background-color: wheat;
+        }
+        .prev{
+            background: url('https://wx2.sinaimg.cn/orj360/005HOofily1hbgkjd9hmaj32c0340000.jpg') no-repeat center center;
+            background-size: 20px;
+        }
+        .play{
+            background: url('https://wx3.sinaimg.cn/orj360/005HOofily1hbgkk8kl1kj32c0340u0y.jpg') no-repeat center center;
+            background-size: 20px;
+        }
+        .next{
+            background: url('https://wx1.sinaimg.cn/orj360/005HOofily1hbgkla1n3nj30sg0lcjxt.jpg') no-repeat center center;
+            background-size: 20px;
+        }
+        .control.active .play{
+            background: url('https://wx3.sinaimg.cn/orj360/005HOofily1hb93ckl4v7j31o0280x6p.jpg') no-repeat center center;
+            background-size: 20px;
+        }
+        .info{
+            width: 170px;
+            opacity: 0;
+            position: absolute;
+            height: 60px;
+            top: -50px;
+            left: 10px;
+            right: 10px;
+            background: rgba(255,233,255,0.5);
+            padding: 5px 15px 5px 110px;
+            border-radius: 15px;
+        }
+        .info.active {
+            opacity: 1;
+        }
+        .song{
+            color: #222;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .name{
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<!--  播放器-->
+<audio id="myAudio">
+    <source src="https://m801.music.126.net/20230302233749/42fde8766e7c76d2328979d2d6ba817b/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/10085734014/a99c/f526/f06a/8f74ec8d9ce299778067739a3858f33e.m4a" type="audio/mpeg">
+</audio>
+<div class="player">
+    <div class="info" id="info">
+        <div class="song">Giri Giri</div>
+        <div class="name">许杨玉琢</div>
+    </div>
+    <div class="control" id="control">
+        <div class="alarm" id="alarm"></div>
+
+        <div class="button">
+            <div class="prev"></div>
+            <div id="play" class="play"></div>
+            <div class="next"></div>
+        </div>
+
+
+    </div>
+</div>
+<script>
+    let playBut=document.getElementById('play');
+    let myAudio=document.getElementById('myAudio');
+    let controlDom=document.getElementById('control');
+    let infobar=document.getElementById('info');
+    playBut.addEventListener("click",playF);
+    function playF(){
+        let flag = Array.from(controlDom.classList).some(function(item){
+            return item=="active";
+        });
+        if (flag){
+            controlDom.classList.remove('active');
+            infobar.classList.remove('after');
+            myAudio.pause();
+        }else{
+            controlDom.classList.add('active');
+            infobar.classList.add('active');
+            myAudio.play();
+        }
+    }
+</script>
+
+</body>
+</html>

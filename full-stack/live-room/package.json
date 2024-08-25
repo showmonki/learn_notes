@@ -1,0 +1,31 @@
+{
+  "name": "electron-react-ts-app",
+  "version": "1.0.0",
+  "main": "electron/main.mjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "electron": "wait-on tcp:3000 && electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"npm run electron\""
+  },
+  "dependencies": {
+    "axios": "^1.7.5",
+    "electron": "^31.0.2",
+    "electron-store": "^10.0.0",
+    "js-yaml": "^4.1.0",
+    "node-nim": "^9.16.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.1",
+    "vite-plugin-optimizer": "^1.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.0.2",
+    "vite": "^5.0.0",
+    "wait-on": "^7.2.0"
+  }
+}

@@ -1,12 +1,10 @@
 import { useRef, useEffect } from 'react';
 import NodeNimChatroomSocket from '../pages/chatroom/sdk/NodeNimChatroomSocket'; // 更新路径
+import getConfig from '../utils/config';
 
 function Danmu() {
     const nimRef = useRef<NodeNimChatroomSocket | null>(null);
-    const accid = '20220710203046_tm3o5zbf8qc1eiv'; // 替换为实际账号
-    const pwd = '834bdkfzzg'; // 替换为实际token
-    const roomId = '3872026'; // 替换为实际房间ID
-    const appDataDir = 'your_app_data_dir'; // 替换为实际数据目录
+    const { accid, pwd, roomId, appDataDir } = getConfig(); // 从配置中获取值
 
     function handleNewMessage(messages: Array<ChatRoomMessage>) {
         // 处理新消息

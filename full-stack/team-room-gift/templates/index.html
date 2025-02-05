@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Room View</title>
+    <link rel="stylesheet" href="/static/style.css"> <!-- 可选的样式 -->
+</head>
+<body>
+    <h1>Gift Room View</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Gift ID</th>
+                <th>Gift Name</th>
+                <th>Message Time</th>
+                <th>User ID</th>
+                <th>Nickname</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.giftId }}</td>
+                <td>{{ row.giftName }}</td>
+                <td>{{ row.msg_time }}</td>
+                <td>{{ row.userId }}</td>
+                <td>{{ row.nickName }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> 
